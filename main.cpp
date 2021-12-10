@@ -3,6 +3,9 @@
 #include <GL/glut.h>
 #include <windows.h>
 #include <math.h>
+#include<windows.h>
+#include<mmsystem.h>
+
 using namespace std;
 
 
@@ -15,9 +18,8 @@ void Idle()
 void bridgeRoad()
 {
 
-
     glLineWidth(15.5);
-    glBegin(GL_LINES);// bridge upper part
+    glBegin(GL_LINE_STRIP);// bridge upper part left back
     for(int i=0; i<200; i++)
     {
         glColor3ub(178,34,34);
@@ -35,7 +37,7 @@ void bridgeRoad()
     glEnd();
 
     glLineWidth(15.5);
-    glBegin(GL_LINES);// bridge upper part
+    glBegin(GL_LINE_STRIP);// bridge upper part mid back
     for(int i=0; i<200; i++)
     {
         glColor3ub(178,34,34);
@@ -53,7 +55,7 @@ void bridgeRoad()
     glEnd();
 
     glLineWidth(15.5);
-    glBegin(GL_LINES);// bridge upper part
+    glBegin(GL_LINE_STRIP);// bridge upper part right back
     for(int i=0; i<200; i++)
     {
         glColor3ub(178,34,34);
@@ -83,7 +85,7 @@ void bridgeRoad()
 
     glEnd();
 
-    glBegin(GL_POLYGON);              //bridge road side
+    glBegin(GL_POLYGON);              //bridge road side front
     glColor3ub(255,250,240);
 
 
@@ -94,7 +96,7 @@ void bridgeRoad()
 
     glEnd();
 
-    glBegin(GL_POLYGON);              //bridge road side
+    glBegin(GL_POLYGON);              //bridge road side back
     glColor3ub(255,250,240);
 
 
@@ -470,7 +472,7 @@ void bridgeRoad()
 
 
     glLineWidth(1.5);
-    glBegin(GL_LINES);              //railing
+    glBegin(GL_LINES);              //railing back up
     glColor3ub(192,192,192);
 
     glVertex2f(-60.0f, -8.0f);    // x, y
@@ -481,7 +483,7 @@ void bridgeRoad()
 
 
     glLineWidth(1.0);
-    glBegin(GL_LINES);              //railing
+    glBegin(GL_LINES);              //railing down
     glColor3ub(192,192,192);
 
     glVertex2f(-62.0f, -9.0f);    // x, y
@@ -493,7 +495,7 @@ void bridgeRoad()
     glEnd();
 
     glLineWidth(2.0);
-    glBegin(GL_LINES);              //railing
+    glBegin(GL_LINES);              //railing || back
     glColor3ub(178,34,34);
 
 
@@ -674,14 +676,16 @@ void bridgeRoad()
 
     glEnd();
 
+    //------------------------------------------------------------------------
+
+
 }
 
 
 void bridgeUpperPart()
 {
-
-glLineWidth(15.5);
-    glBegin(GL_LINES);// bridge upper part
+ glLineWidth(15.5);
+    glBegin(GL_LINE_STRIP);// bridge upper part left front
     for(int i=0; i<200; i++)
     {
         glColor3ub(178,34,34);
@@ -701,7 +705,7 @@ glLineWidth(15.5);
 
 
     glLineWidth(15.5);
-    glBegin(GL_LINES);// bridge upper part
+    glBegin(GL_LINE_STRIP);// bridge upper part mid front
     for(int i=0; i<200; i++)
     {
         glColor3ub(178,34,34);
@@ -721,7 +725,7 @@ glLineWidth(15.5);
 
 
     glLineWidth(15.5);
-    glBegin(GL_LINES);// bridge upper part
+    glBegin(GL_LINE_STRIP);// bridge upper part right front
     for(int i=0; i<200; i++)
     {
         glColor3ub(178,34,34);
@@ -739,7 +743,7 @@ glLineWidth(15.5);
     glEnd();
 
     glLineWidth(1.5);
-    glBegin(GL_LINES);              //railing
+    glBegin(GL_LINES);              //railing front up
     glColor3ub(192,192,192);
 
     glVertex2f(-60.0f, -18.0f);    // x, y
@@ -749,7 +753,7 @@ glLineWidth(15.5);
 
 
     glLineWidth(1.0);
-    glBegin(GL_LINES);              //railing
+    glBegin(GL_LINES);              //railing front bottom
     glColor3ub(192,192,192);
 
     glVertex2f(-62.0f, -19.0f);    // x, y
@@ -760,7 +764,7 @@ glLineWidth(15.5);
 
 
     glLineWidth(2.0);
-    glBegin(GL_LINES);              //railing
+    glBegin(GL_LINES);              //railing || front
     glColor3ub(178,34,34);
 
 
@@ -943,6 +947,7 @@ glLineWidth(15.5);
 
 
     glEnd();
+
 }
 
 
@@ -968,7 +973,7 @@ float _move2 = 0.0f;
     glEnd();
 
 
-    glBegin(GL_QUADS);              //water
+    glBegin(GL_QUADS);              //lake bank left
     glColor3ub(238, 207, 161);
 
 
@@ -982,8 +987,7 @@ float _move2 = 0.0f;
     glEnd();
 
 
-    glBegin(GL_QUADS);              //water
-    glColor3ub(238, 207, 161);
+    glBegin(GL_QUADS);              //lake bank right
 
 
 
@@ -1000,7 +1004,7 @@ float _move2 = 0.0f;
     glPushMatrix();
     glTranslatef(_move1,0.0,0.0);
     glLineWidth(1.0);
-    glBegin(GL_LINES);              //moving water
+    glBegin(GL_LINES);              //moving water ---> right
     glColor3ub(255,255,255);
 
 
@@ -1072,7 +1076,7 @@ float _move2 = 0.0f;
     glPushMatrix();
     glTranslatef(_move2,0.0,0.0);
     glLineWidth(1.0);
-    glBegin(GL_LINES);              //moving water
+    glBegin(GL_LINES);              //moving water <----
     glColor3ub(255,255,255);
 
 
@@ -1115,7 +1119,7 @@ void update1(int value)//for water
     }
 
     glutPostRedisplay();
-    glutTimerFunc(200, update1, 0);
+    glutTimerFunc(300, update1, 0);
 }
 
 void update2(int value)//for water
@@ -1128,7 +1132,7 @@ void update2(int value)//for water
     }
 
     glutPostRedisplay();
-    glutTimerFunc(200, update2, 0);
+    glutTimerFunc(300, update2, 0);
 }
 
 
@@ -1161,7 +1165,7 @@ void ship()
     glEnd();
 
         glLineWidth(1.5);
-        glBegin(GL_LINES);              // railing
+        glBegin(GL_LINES);              // ship railing
         glColor3ub(128,128,128);
 
 
@@ -1192,7 +1196,7 @@ void ship()
         glEnd();
 
 
-    glBegin(GL_POLYGON);              // building
+    glBegin(GL_POLYGON);              // ship upper body
 	glColor3ub(176, 196, 222);
 
 
@@ -1296,7 +1300,7 @@ void ship()
     glEnd();
 
     glLineWidth(1.5);
-        glBegin(GL_LINES);              // railing
+        glBegin(GL_LINES);              // floor
         glColor3ub(128,128,128);
 
 
@@ -1310,7 +1314,7 @@ void ship()
         glVertex2f( -14.60f, 2.25f);
 
     glEnd();
-
+/*
     glBegin(GL_POLYGON);// 1-1 window of ship
 	for(int i=0;i<200;i++)
         {
@@ -1410,6 +1414,7 @@ void ship()
             glVertex2f(-6+x,1.35+y );
         }
         glEnd();
+    glPopMatrix();
 
         glBegin(GL_LINES);// 2-1 window of ship
         for(int i=0;i<200;i++)
@@ -1567,7 +1572,7 @@ void ship()
             glVertex2f(8+x,-1.0+y );
         }
         glEnd();
-
+*/
 
         glLineWidth(2.0);
         glBegin(GL_LINES);              // flag pole
@@ -1595,7 +1600,7 @@ void ship()
 
     glEnd();
 
-    glBegin(GL_POLYGON);// round of flag
+    glBegin(GL_POLYGON);                // red circle
         for(int i=0;i<200;i++)
         {
             glColor3ub(255,0,0);
@@ -1614,7 +1619,7 @@ void ship()
 
 }
 
-void updateShip(int value)//for ship
+void updateShip(int value)  //for ship
 {
     moveship += 0.2;
     if(moveship > 40)
@@ -1627,7 +1632,7 @@ void updateShip(int value)//for ship
     glutTimerFunc(200, updateShip, 0);
 }
 
-void sky()                       // sky body
+void sky()                       // sky
 {
     glBegin(GL_POLYGON);
 	glColor3ub(135, 206, 255);
@@ -1650,10 +1655,10 @@ float angleBluecar1 = 0.0f;
 float angleBlueCar2= 0.0f;
 
 
-                            //blue car
+
 void blueCar()
 {
-    //bluecar body
+    //blue car body
 
     glPushMatrix();
     glTranslatef(moveBlueCar,0.0,0.0);
@@ -1721,22 +1726,15 @@ void blueCar()
 	glVertex2f(11.55f, 5.70f);
 	glVertex2f(9.0f, 5.70f);
 
-
-
-
     glEnd();
+
 
     glBegin(GL_POLYGON);              // 2nd door glasss of car
 	glColor3ub(245, 245, 245);
-
-
     glVertex2f(12.15f, 4.0f);
 	glVertex2f(16.65f, 4.0f);
 	glVertex2f(14.65f, 5.70f);
 	glVertex2f(12.15f, 5.70f);
-
-
-
 
     glEnd();
 
@@ -1770,6 +1768,7 @@ void blueCar()
 
 	glVertex2f(1.0f, 1.55f);
 	glVertex2f(1.65f, 1.55f);
+
 
 
 
@@ -2643,7 +2642,7 @@ void updateGreenCar3(int value)//for ship
 }
 
 
-
+//0,0,255
 float movecloud12=0.0f;
 float movecloud3=0.0f;
 void Cloud()
@@ -2880,7 +2879,7 @@ void Cloud()
 
 }
 
-void updatecloud12(int value)//for ship
+void updatecloud12(int value)
 {
     movecloud12 += 1.2;
     if(movecloud12 > 100)
@@ -2893,7 +2892,7 @@ void updatecloud12(int value)//for ship
     glutTimerFunc(100, updatecloud12, 0);
 }
 
-void updatecloud3(int value)//for ship
+void updatecloud3(int value)
 {
     movecloud3 -= 1.2;
     if(movecloud3 < -100)
@@ -2906,10 +2905,12 @@ void updatecloud3(int value)//for ship
     glutTimerFunc(100, updatecloud3, 0);
 }
 
-
+  //Sun
 void sun()
 {
-    glBegin(GL_POLYGON);// cloud
+
+
+    glBegin(GL_POLYGON);
 	for(int i=0;i<200;i++)
         {
 
@@ -2918,7 +2919,7 @@ void sun()
 
             float pi=3.1416;
             float A=(i*2*pi)/200;
-            float r=6.5;
+            float r=6;
             float x = r * cos(A);
             float y = r * sin(A);
 
@@ -2928,9 +2929,10 @@ void sun()
 
 
 	glEnd();
+
 }
-
-
+//<----------------------------------------------------------------------------------------------------------------------->
+/*
 void uTurn()
 {
     glPushMatrix();
@@ -2970,7 +2972,7 @@ void uTurn()
      glEnd();
 
 }
-
+*/
 void down_upperroad()
 {
     glBegin(GL_POLYGON);              // down-upper road
@@ -3032,7 +3034,7 @@ void down_upperroad()
     //Road Lines Down
 
     glLineWidth(2.5);
-	glBegin(GL_LINES);              //road lines R
+	glBegin(GL_LINES);              //road lines
 	glColor3ub(255,255,255);
 
 	glVertex2f(-98.0f, 25.0f);    // x, y
@@ -4217,10 +4219,10 @@ void up_upperroad()
 
     glLineWidth(3.5);
     glBegin(GL_LINES);
-    glColor3ub(255, 255, 255);             // down-upper road side
+    glColor3ub(255,255,255);             // down-upper road side
 
     // White
-    glVertex2f(50.0f, -15.0f);    // x, y
+    glVertex2f(50.0f, -8.8f);    // x, y
     glVertex2f(50.0f, -100.00f);
 
     glEnd();
@@ -4387,7 +4389,7 @@ void up_upperroad()
 void Road()
 {
 
-    //ROAD
+    //ROAD Left 2
 	glBegin(GL_QUADS);
 	glColor3ub(56, 56, 56);
 
@@ -4399,7 +4401,7 @@ void Road()
 
 	glEnd();
 
-	//Road (2)
+	//Road left
     glBegin(GL_QUADS);
 	glColor3ub(56, 56, 56);
 
@@ -4873,7 +4875,7 @@ void Building()
 	glEnd();
 
 
-	//Block Gates Design Left
+	//Building big glass left (twin)
 	 glBegin(GL_QUADS);
 	glColor3ub(139, 119, 101);
 
@@ -4886,7 +4888,7 @@ void Building()
 
 
 
-//Block Gates Design Right
+//Building big glass right (twin)
 	 glBegin(GL_QUADS);
 	glColor3ub(139, 119, 101);
 
@@ -5294,10 +5296,10 @@ void Building()
     glVertex2f(57.55f, -29.0f);
     glVertex2f(57.55f, -22.2f);
 
-     glEnd();
+    glEnd();
 
-     glLineWidth(1.0);
-     glBegin(GL_LINES);
+    glLineWidth(1.0);
+    glBegin(GL_LINES);
 	glColor3ub(255, 255, 255);
 
     glVertex2f(59.4f, -29.0f);
@@ -5853,7 +5855,7 @@ void Park()
     glEnd();
 
 
-
+//<<<------------------------------------------------------------------------->>>
 
 
       //Park Chair
@@ -5947,6 +5949,7 @@ void Park()
 
     glEnd();
 
+// Chair leg
 
     glLineWidth(4.5);
 	glBegin(GL_LINES);
@@ -5955,10 +5958,8 @@ void Park()
     glVertex2f(64.50f, -50.50f);
     glVertex2f(64.50f, -54.0f);
 
-     glEnd();
+    glEnd();
 
-
-// Chair Stand
 
     glLineWidth(4.5);
 	glBegin(GL_LINES);
@@ -5970,7 +5971,7 @@ void Park()
      glEnd();
 
 
-     glLineWidth(3.0);
+    glLineWidth(3.0);
 	glBegin(GL_LINES);
 	glColor3ub(139, 26, 26);
 
@@ -5993,7 +5994,7 @@ void Park()
 
      glLineWidth(3.0);
 	glBegin(GL_LINES);
-	glColor3ub(139, 26, 26);
+	glColor3ub(139,26,26);
 
     glVertex2f(65.0f, -43.0f);
     glVertex2f(64.0f, -48.50f);
@@ -6033,7 +6034,7 @@ void Park()
 
 
 
-     //Dolna
+     //Swing
 
 
     glLineWidth(6.0);
@@ -6068,7 +6069,7 @@ void Park()
 
     glLineWidth(5.0);
 	glBegin(GL_LINES);
-	glColor3ub(3, 3, 3);
+	glColor3ub(3,3,3);
 
     glVertex2f(89.0f, -42.0f);
     glVertex2f(92.0f, -56.0f);
@@ -6086,7 +6087,7 @@ void Park()
      glEnd();
 
 
-     //Dolna Middle Shape
+     //Swing rope
 
 
     glLineWidth(3.0);
@@ -6129,8 +6130,8 @@ void Park()
 
      glEnd();
 
-
-     glBegin(GL_QUADS);
+    //swing seat
+    glBegin(GL_QUADS);
 	glColor3ub(232, 232, 232);
 
     glVertex2f(85.5f, -51.5f);
@@ -6141,9 +6142,9 @@ void Park()
     glEnd();
 
 
+//<<<<<<<<------------------------------------------------
 
-
-      //Park Lamp post 1
+     //Park Lamp post 1
 
     glBegin(GL_QUADS);
 	glColor3ub(139, 69, 19);
@@ -6155,7 +6156,7 @@ void Park()
 
     glEnd();
 
-
+//base
     glLineWidth(3.50);
 	glBegin(GL_LINES);
 	glColor3ub(139, 69, 19);
@@ -6430,15 +6431,6 @@ void Building3()
 
      glEnd();
 
-     glBegin(GL_QUADS);
-	glColor3ub(255, 245, 238);
-
-    glVertex2f(55.0f, 47.50f);
-    glVertex2f(57.50f, 47.50f);
-    glVertex2f(57.50f, 49.50f);
-    glVertex2f(55.0f, 49.50f);
-
-     glEnd();
 
 
     glLineWidth(3.0);
@@ -7233,10 +7225,10 @@ void Building6()
      glBegin(GL_QUADS);
 	 glColor3ub(255, 99, 71);
 
-     glVertex2f(72.20f, 62.0f);
-     glVertex2f(75.80f, 62.0f);
-     glVertex2f(75.80f, 74.0f);
-     glVertex2f(72.20f, 74.0f);
+     glVertex2f(72.10f, 62.0f);
+     glVertex2f(75.90f, 62.0f);
+     glVertex2f(75.90f, 74.0f);
+     glVertex2f(72.10f, 74.0f);
 
      glEnd();
 
@@ -7270,7 +7262,19 @@ void Building6()
      glVertex2f(73.50f, 77.0f);
 
      glEnd();
+//
 
+glLineWidth(1.5);
+	 glBegin(GL_LINES);
+	 glColor3ub(25, 25, 112);
+
+     glVertex2f(74.00f, 81.0f);
+     glVertex2f(74.00f, 77.0f);
+
+     glEnd();
+
+
+//
 
      glLineWidth(7.5);
 	 glBegin(GL_LINES);
@@ -7411,16 +7415,6 @@ void Building7()
      glEnd();
 
 
-     glLineWidth(30.0);
-	 glBegin(GL_LINES);
-	 glColor3ub(139, 35, 35);
-
-     glVertex2f(81.0f, 43.0f);
-     glVertex2f(81.0f, 46.0f);
-
-     glEnd();
-
-
      glLineWidth(7.70);
 	 glBegin(GL_LINES);
 	 glColor3ub(139, 35, 35);
@@ -7462,7 +7456,6 @@ void Building7()
      glPushMatrix();
      glTranslatef(0.0f,4.0f,0.0f);
      glLineWidth(7.70);
-	 glLineWidth(7.70);
 	 glBegin(GL_LINES);
 	 glColor3ub(139, 35, 35);
 
@@ -7503,7 +7496,6 @@ void Building7()
 
      glTranslatef(0.0f,4.0f,0.0f);
      glLineWidth(7.70);
-	 glLineWidth(7.70);
 	 glBegin(GL_LINES);
 	 glColor3ub(139, 35, 35);
 
@@ -7543,7 +7535,6 @@ void Building7()
 
      glTranslatef(0.0f,4.0f,0.0f);
      glLineWidth(7.70);
-	 glLineWidth(7.70);
 	 glBegin(GL_LINES);
 	 glColor3ub(139, 35, 35);
 
@@ -8348,7 +8339,7 @@ void tree2()
 
 
     glLineWidth(10.5);
-        glBegin(GL_LINES);              // railing
+        glBegin(GL_LINES);
         glColor3ub(160,82,45);
 
 
@@ -8675,7 +8666,7 @@ void tree3()
 
 
     glLineWidth(10.5);
-        glBegin(GL_LINES);              // railing
+        glBegin(GL_LINES);
         glColor3ub(160,82,45);
 
 
@@ -9003,7 +8994,7 @@ void tree4()
 
 
     glLineWidth(5.5);
-        glBegin(GL_LINES);              // railing
+        glBegin(GL_LINES);
         glColor3ub(160,82,45);
 
 
@@ -10305,7 +10296,7 @@ glBegin(GL_POLYGON);
 void PassengerCamp()
 {
 
-    //PassengerCamp body
+    //BusStand wall big
 
     glPushMatrix();
 
@@ -14252,7 +14243,7 @@ void yellowBus()
 
 void ParkRoad()
 {
-    //1st CAR
+
 
 	glBegin(GL_QUADS);
 	glColor3ub(55, 55, 55);
@@ -15020,7 +15011,8 @@ void Lamppost()
 void Policebox()
 {
     //Policebox body
-
+glPushMatrix();
+glTranslatef(-1,-2.5,0);
     glBegin(GL_QUADS);
 	glColor3ub(0,139,139);
 
@@ -15043,6 +15035,7 @@ void Policebox()
 
 
      glEnd();
+    glPopMatrix();
 }
 
 void moon()
@@ -15285,7 +15278,8 @@ void stars()
     glVertex2f(39.0f,60.0f);
     glVertex2f(20.0f,90.0f);
     glVertex2f(10.0f,84.0f);
-    glVertex2f(0.0f,82.0f);glVertex2f(-80.0f,80.0f);
+    glVertex2f(0.0f,82.0f);
+    glVertex2f(-80.0f,80.0f);
     glVertex2f(-75.0f,81.0f);
     glVertex2f(-65.0f,87.0f);
     glVertex2f(-60.0f,85.0f);
@@ -15580,7 +15574,7 @@ void updatenightCloud3(int value)
 void NightBuilding()
 {
 
-    //Building Body
+    //Buildings infront of park
     glBegin(GL_POLYGON);
 	glColor3ub(139, 137, 137);
 
@@ -17367,10 +17361,10 @@ void NightBuilding6()
      glBegin(GL_QUADS);
 	 glColor3ub(71, 71, 71);
 
-     glVertex2f(72.20f, 62.0f);
-     glVertex2f(75.80f, 62.0f);
-     glVertex2f(75.80f, 74.0f);
-     glVertex2f(72.20f, 74.0f);
+     glVertex2f(72.10f, 62.0f);
+     glVertex2f(75.90f, 62.0f);
+     glVertex2f(75.90f, 74.0f);
+     glVertex2f(72.10f, 74.0f);
 
      glEnd();
 
@@ -17405,6 +17399,15 @@ void NightBuilding6()
 
      glEnd();
 
+
+     glLineWidth(1.5);
+	 glBegin(GL_LINES);
+	 glColor3ub(25, 25, 112);
+
+     glVertex2f(74.00f, 81.0f);
+     glVertex2f(74.00f, 77.0f);
+
+     glEnd();
 
      glLineWidth(7.5);
 	 glBegin(GL_LINES);
@@ -17540,16 +17543,6 @@ void NightBuilding7()
     glVertex2f(85.20f, 59.0f);
     glVertex2f(84.0f, 62.0f);
     glVertex2f(79.0f, 62.0f);
-
-     glEnd();
-
-
-     glLineWidth(30.0);
-	 glBegin(GL_LINES);
-	 glColor3ub(139, 35, 35);
-
-     glVertex2f(81.0f, 43.0f);
-     glVertex2f(81.0f, 46.0f);
 
      glEnd();
 
@@ -23990,7 +23983,7 @@ void NightPark()
 
 }
 
-static void Varsity()
+void Varsity()
 {
     glPushMatrix();
     glTranslatef(0.0, -15.0,0.0);
@@ -24849,8 +24842,7 @@ static void Varsity()
 
 }
 
-
-static void nightVarsity()
+ void nightVarsity()
 {
      glPushMatrix();
     glTranslatef(0.0, -15.0,0.0);
@@ -25570,7 +25562,7 @@ static void nightVarsity()
 
 	glBegin(GL_QUADS);
 
-	glColor3ub(255,215,0);
+	glColor3ub(67, 110, 238);
 
 
 	glVertex2f(-74.0f, 88.0f);
@@ -25724,7 +25716,7 @@ static void nightVarsity()
 
 
 }
-void dayView(void)
+void dayView()
 {
    /* glLoadIdentity();
     glMatrixMode(GL_MODELVIEW);*/
@@ -25781,7 +25773,7 @@ void dayView(void)
     boat1();
     boat2();
     ParkRoad();
-    uTurn();
+//    uTurn();
     greenBus();
     Policebox();
 
@@ -25793,7 +25785,7 @@ void dayView(void)
 }
 
 
-void nightView(void)
+void nightView()
 {
    /* glLoadIdentity();
     glMatrixMode(GL_MODELVIEW);*/
@@ -25850,7 +25842,7 @@ void nightView(void)
     boat1();
     boat2();
     ParkRoad();
-    uTurn();
+//    uTurn();
     greenBus();
     Policebox();
 
@@ -25888,10 +25880,11 @@ int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
     glutInitWindowSize(1500, 720);
-    glutCreateWindow("project");
+    glutCreateWindow("HatirJheel");
     gluOrtho2D(-100.0,100.0,-100.0,100.0);
     glutDisplayFunc(dayView);
     glutKeyboardFunc(handleKeypress);
+    //glutFullScreen();
 
     glutIdleFunc(Idle);
 
@@ -25918,6 +25911,7 @@ int main(int argc, char** argv)
     glutTimerFunc(200, updateNightWater2, 0);
     glutTimerFunc(100, updatenightCloud12, 0);
     glutTimerFunc(100, updatenightCloud3, 0);
+    //sndPlaySound("Ghum _Bhanga _ Minar _Rahman.wav",SND_ASYNC|SND_LOOP);
 
 
     glutMainLoop();           // Enter the event-processing loop
