@@ -1,17 +1,62 @@
 #include <iostream>
-#include<GL/gl.h>
+#include <GL/gl.h>
 #include <GL/glut.h>
 #include <windows.h>
 #include <math.h>
-#include<windows.h>
-#include<mmsystem.h>
+#include <windows.h>
+#include <mmsystem.h>
+#include<cstring>
+//#include <graphics.h>
 
 using namespace std;
+int i,x,y;
+void rain()
+{
+    glLineWidth(2);
+    glPushMatrix();
+    glTranslatef(-100,-110,0);
+    glBegin(GL_LINE);
+    for(i=1;i<=720;i++)
+    {
+        x=rand(),y=rand();
+        x%=1000;y%=250;
+        glBegin(GL_LINES);
+        glColor3ub(255,255,255);
+        glVertex2d(x,y);
+        glVertex2d(x+5,y+20);
+        glEnd();
+    }
+    glPopMatrix();
+}
 
+char text[] = "Police";
+void Sprint( float x, float y, char *st)
+{
+    int l,i;
+
+
+    l=strlen( st ); // see how many characters are in text string.
+    glColor3f(255,0,0);
+    //glDisable(GL_LIGHTING);
+    glRasterPos2f( x, y); // location to start printing text
+    for( i=0; i < l; i++) // loop until i is greater then l
+    {
+       glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, st[i]);
+
+    }
+
+
+}
 
 void Idle()
 {
     glutPostRedisplay();//// marks the current window as needing to be redisplayed
+    //glPushMatrix();
+    //glColor3f(1.000, 1.000, 0.000);
+    //glTranslatef(0.0,-0.20,0.0);
+    //glRotatef(-80,1.0,0.0,0.0);
+    //glutWireCone(.04,.05,10,10);
+    //glPopMatrix();
 }
 
 
@@ -100,9 +145,11 @@ void bridgeRoad()
     glColor3ub(255,250,240);
 
 
+
+
     glVertex2f(-75.0f, -10.0f);
-    glVertex2f(45.0f, -10.0f);
-    glVertex2f(45.0f, -9.0f);
+    glVertex2f(50.0f, -10.0f);
+    glVertex2f(50.0f, -9.0f);
     glVertex2f(-75.0f, -9.0f);
 
     glVertex2f(-80.0f, -20.0f);
@@ -949,6 +996,7 @@ void bridgeUpperPart()
     glEnd();
 
 }
+//-------------------------------------------------------------------------------
 
 
 
@@ -1135,7 +1183,7 @@ void update2(int value)//for water
     glutTimerFunc(300, update2, 0);
 }
 
-
+//-----------------------------------------------------------------------
 float moveship=0.0f;
 
 void ship()
@@ -1217,7 +1265,7 @@ void ship()
 
     glEnd();
 
-    glBegin(GL_POLYGON);              // 1st floor glass
+glBegin(GL_POLYGON);              // 1st floor glass
 
 
     glColor3ub(255, 255, 255);
@@ -1314,265 +1362,7 @@ void ship()
         glVertex2f( -14.60f, 2.25f);
 
     glEnd();
-/*
-    glBegin(GL_POLYGON);// 1-1 window of ship
-	for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
 
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.30;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-4+x,0.35+y );
-        }
-        glEnd();
-
-        glBegin(GL_LINES);// 1-1 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.40;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-4+x,0.35+y );
-        }
-        glEnd();
-
-        glBegin(GL_POLYGON);// 1-2 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.30;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-8+x,0.20+y );
-        }
-        glEnd();
-
-        glBegin(GL_LINES);// 1-2 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.40;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-8+x,0.20+y );
-        }
-        glEnd();
-
-
-        glBegin(GL_POLYGON);// 1-3 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.30;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-12+x,0.0+y );
-        }
-        glEnd();
-
-        glBegin(GL_LINES);// 1-3 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.40;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-12+x,0.0+y );
-        }
-        glEnd();
-
-
-        glBegin(GL_POLYGON);// 2-1 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.30;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-6+x,1.35+y );
-        }
-        glEnd();
-    glPopMatrix();
-
-        glBegin(GL_LINES);// 2-1 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.40;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-6+x,1.35+y );
-        }
-        glEnd();
-
-
-        glBegin(GL_POLYGON);// 2-2 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.30;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-10+x,1.0+y );
-        }
-        glEnd();
-
-        glBegin(GL_LINES);// 2-2 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.40;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-10+x,1.0+y );
-        }
-        glEnd();
-
-        glBegin(GL_POLYGON);// 3-1 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.30;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-8+x,2.35+y );
-        }
-        glEnd();
-
-        glBegin(GL_LINES);// 3-1 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.40;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-8+x,2.35+y );
-        }
-        glEnd();
-
-
-        glBegin(GL_POLYGON);// 3-2 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.30;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-12+x,2.0+y );
-        }
-        glEnd();
-
-        glBegin(GL_LINES);// 3-2 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.40;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-12+x,2.0+y );
-        }
-        glEnd();
-
-        glBegin(GL_POLYGON);// 4-1 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.30;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-12+x,3.0+y );
-        }
-        glEnd();
-
-        glBegin(GL_LINES);// 4-1 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(47 ,79, 79);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.40;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(-12+x,3.0+y );
-        }
-        glEnd();
-
-
-         glBegin(GL_POLYGON);// 4-1 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(20, 20, 20);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.40;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(8+x,-1.0+y );
-        }
-        glEnd();
-
-        glBegin(GL_LINES);// 4-1 window of ship
-        for(int i=0;i<200;i++)
-        {
-            glColor3ub(20 ,20, 20);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=0.50;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(8+x,-1.0+y );
-        }
-        glEnd();
-*/
 
         glLineWidth(2.0);
         glBegin(GL_LINES);              // flag pole
@@ -1621,8 +1411,8 @@ void ship()
 
 void updateShip(int value)  //for ship
 {
-    moveship += 0.2;
-    if(moveship > 40)
+    moveship += 0.1;
+    if(moveship > 64)
 
     {
         moveship = -10;
@@ -1631,10 +1421,11 @@ void updateShip(int value)  //for ship
     glutPostRedisplay();
     glutTimerFunc(200, updateShip, 0);
 }
+//----------------------------------------------------------------------------------
 
 void sky()                       // sky
 {
-    glBegin(GL_POLYGON);
+ glBegin(GL_POLYGON);
 	glColor3ub(135, 206, 255);
 
 
@@ -2312,334 +2103,6 @@ void updateGoldenCar3(int value)//for ship
 }
 
 
-float movegreenCar=0.0f;
-float anglegreenCar1 = 0.0f;
-float anglegreenCar2= 0.0f;
-
-void greenCar()
-{
-    glPushMatrix();
-    glTranslatef(movegreenCar,0.0,0.0);
-    glScalef(-0.75,1,0);
-    glTranslatef(75.0,-15.0,0.0);
-    glBegin(GL_POLYGON);              // car
-	glColor3ub(107,142,35);
-
-
-    glVertex2f(1.0f, 1.5f);
-	glVertex2f(0.5f, 1.0f);
-	glVertex2f(20.5f, 1.0f);
-	glVertex2f(21.0f, 1.5f);
-	glVertex2f(21.0f, 4.25f);
-	glVertex2f(20.0f, 4.0f);
-	glVertex2f(17.0f, 4.0f);
-	glVertex2f(15.0f, 5.75f);
-	glVertex2f(15.5f, 6.0f);
-	glVertex2f(9.0f, 6.0f);
-	glVertex2f(6.0f, 4.0f);
-	glVertex2f(1.0f, 3.0f);
-
-
-    glEnd();
-
-
-
-
-    glBegin(GL_POLYGON);              // head light
-	glColor3ub(255,255,255);
-
-
-    glVertex2f(1.0f, 2.5f);
-	glVertex2f(1.65f, 2.5f);
-	glVertex2f(2.5f, 2.8f);
-	glVertex2f(1.0f, 2.8f);
-
-
-
-	    // x, y
-
-    glEnd();
-
-    glBegin(GL_POLYGON);              // back light
-	glColor3ub(255,0,0);
-
-
-    glVertex2f(20.50f, 3.0f);
-	glVertex2f(20.50f, 2.0f);
-	glVertex2f(21.0f, 2.0f);
-	glVertex2f(21.0f, 3.5f);
-
-
-
-	    // x, y
-
-    glEnd();
-
-    glBegin(GL_POLYGON);              // 1st door glasss of car
-	glColor3ub(255,255,255);
-
-
-    glVertex2f(6.15f, 4.0f);
-	glVertex2f(11.55f, 4.0f);
-	glVertex2f(11.55f, 5.70f);
-	glVertex2f(9.0f, 5.70f);
-
-
-
-
-    glEnd();
-
-    glBegin(GL_POLYGON);              // 2nd door glasss of car
-	glColor3ub(245, 245, 245);
-
-
-    glVertex2f(12.15f, 4.0f);
-	glVertex2f(16.65f, 4.0f);
-	glVertex2f(14.65f, 5.70f);
-	glVertex2f(12.15f, 5.70f);
-
-
-
-
-    glEnd();
-
-    glLineWidth(0.5);
-    glBegin(GL_LINES);              // Each set of 4 vertices form a quad
-	glColor3ub(128,128,128); // Red
-	glVertex2f(12.0f, 1.25f);    // x, y
-	glVertex2f(12.0f, 5.75f);    // x, y
-
-	glEnd();
-
-	glLineWidth(0.5);
-	glBegin(GL_LINES);              // Each set of 4 vertices form a quad
-	glColor3ub(128,128,128); // Red
-	glVertex2f(6.0f, 2.25f);    // x, y
-	glVertex2f(6.0f, 3.75f);    // x, y
-
-	glEnd();
-
-    glLineWidth(1.5);
-	glBegin(GL_LINES);              // Each set of 4 vertices form a quad
-	glColor3ub(128,128,128); // Red
-	glVertex2f(17.0f, 2.25f);    // x, y
-	glVertex2f(17.0f, 3.75f);
-
-	glVertex2f(1.0f, 2.0f);
-	glVertex2f(2.0f, 2.0f);
-
-	glVertex2f(1.0f, 1.75f);
-	glVertex2f(1.80f, 1.75f);
-
-	glVertex2f(1.0f, 1.55f);
-	glVertex2f(1.65f, 1.55f);
-
-
-
-
-
-	    // x, y
-
-	glEnd();
-
-	glBegin(GL_POLYGON);// front tire
-	for(int i=0;i<200;i++)
-        {
-            glColor3ub(46, 46, 46);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=1.5;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(6+x,1.5+y );
-        }
-
-
-
-	glEnd();
-
-	glBegin(GL_POLYGON);// front tire wheel
-	for(int i=0;i<200;i++)
-        {
-            glColor3ub(205, 205, 180);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=1.0;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(6+x,1.5+y );
-        }
-
-        glEnd();
-
-    glBegin(GL_POLYGON);// back tire
-	for(int i=0;i<200;i++)
-        {
-            glColor3ub(46, 46, 46);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=1.5;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(17+x,1.5+y );
-        }
-
-
-
-	glEnd();
-
-	glBegin(GL_POLYGON);// back tire wheel
-	for(int i=0;i<200;i++)
-        {
-            glColor3ub(205, 205, 180);
-
-            float pi=3.1416;
-            float A=(i*2*pi)/200;
-            float r=1.0;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(17+x,1.5+y );
-        }
-
-
-
-	glEnd();
-
-	glBegin(GL_LINES);// back tire LINE
-	for(int i=0;i<200;i++)
-        {
-            glColor3ub(128,128,128);
-
-            float pi=3.1416;
-            float A=(i*pi)/200;
-            float r=1.65;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(17.05+x,1.5+y );
-        }
-
-
-
-	glEnd();
-
-	glBegin(GL_LINES);// FRONT tire LINE
-	for(int i=0;i<200;i++)
-        {
-            glColor3ub(128,128,128);
-
-            float pi=3.1416;
-            float A=(i*pi)/200;
-            float r=1.65;
-            float x = r * cos(A);
-            float y = r * sin(A);
-            glVertex2f(6.05+x,1.5+y );
-        }
-
-
-
-	glEnd();
-
-	glBegin(GL_POLYGON);              // looking glass
-	glColor3ub(25,25,112);
-
-
-    glVertex2f(6.0f, 4.0f);
-	glVertex2f(7.0f, 4.0f);
-	glVertex2f(7.5f, 4.4f);
-	glVertex2f(7.0f, 4.4f);
-
-    glEnd();
-
-
-
-                    //ROTATING TIRE
-        glPushMatrix();
-        glTranslatef(6.0,1.5,0.0);
-        glRotatef(anglegreenCar1, 0.0f, 0.0f,1.0f);
-
-	    glLineWidth(5.5);
-        glBegin(GL_LINES);              // Each set of 4 vertices form a quad
-        glColor3ub(128,128,128);
-
-         // Red
-        glVertex2f(0.0f, 1.0f);    // x, y
-        glVertex2f(0.0f, -1.0f);
-
-        glVertex2f(1.0f, 0.0f);    // x, y
-        glVertex2f(-1.0f, 0.0f);
-
-
-        glEnd();
-        glPopMatrix();
-
-
-
-        glPushMatrix();
-        glTranslatef(17.0,1.5,0.0);
-        glRotatef(anglegreenCar2, 0.0f, 0.0f,1.0f);
-
-	    glLineWidth(5.5);
-        glBegin(GL_LINES);              // Each set of 4 vertices form a quad
-        glColor3ub(128,128,128);
-
-         // Red
-        glVertex2f(0.0f, 1.00f);    // x, y
-        glVertex2f(0.0f, -1.00f);
-
-        glVertex2f(1.0f, 0.0f);    // x, y
-        glVertex2f(-1.0f, 0.0f);
-
-
-        glEnd();
-
-        glPopMatrix();
-
-        glPopMatrix();
-
-}
-
-
-void updateGreenCar1(int value)
-{
-
-    anglegreenCar1+=2.0f;
-    if(anglegreenCar1 > 360.0)
-    {
-        anglegreenCar1-=360;
-    }
-	glutPostRedisplay(); //Notify GLUT that the display has changed
-
-	glutTimerFunc(1, updateGreenCar1, 0); //Notify GLUT to call update again in 25 milliseconds
-}
-
-void updatGreenCar2(int value)
-{
-
-    anglegreenCar2+=2.0f;
-    if(anglegreenCar2> 360.0)
-    {
-        anglegreenCar2-=360;
-    }
-	glutPostRedisplay(); //Notify GLUT that the display has changed
-
-	glutTimerFunc(1, updatGreenCar2, 0); //Notify GLUT to call update again in 25 milliseconds
-}
-
-void updateGreenCar3(int value)//for ship
-{
-    movegreenCar += 0.4;
-    if(movegreenCar > 100)
-
-    {
-        movegreenCar = -8;
-    }
-
-    glutPostRedisplay();
-    glutTimerFunc(40, updateGreenCar3, 0);
-}
 
 
 //0,0,255
@@ -2881,28 +2344,28 @@ void Cloud()
 
 void updatecloud12(int value)
 {
-    movecloud12 += 1.2;
-    if(movecloud12 > 100)
+    movecloud12 += 0.5;
+    if(movecloud12 > 182)
 
     {
-        movecloud12 = -100;
+        movecloud12 = -182;
     }
 
     glutPostRedisplay();
-    glutTimerFunc(100, updatecloud12, 0);
+    glutTimerFunc(182, updatecloud12, 0);
 }
 
 void updatecloud3(int value)
 {
-    movecloud3 -= 1.2;
-    if(movecloud3 < -100)
+    movecloud3 -= 0.5;
+    if(movecloud3 < -182)
 
     {
-        movecloud3 = 100;
+        movecloud3 = 182;
     }
 
     glutPostRedisplay();
-    glutTimerFunc(100, updatecloud3, 0);
+    glutTimerFunc(182, updatecloud3, 0);
 }
 
   //Sun
@@ -10293,7 +9756,7 @@ glBegin(GL_POLYGON);
 
 
 
-void PassengerCamp()
+void BusStand1()
 {
 
     //BusStand wall big
@@ -13293,8 +12756,6 @@ void tree16()
 
 }
 
-
-
 void boat1()
 {
 
@@ -13513,7 +12974,7 @@ void trafficLight()
 }
 
 
-void PassengerCamp2()
+void BusStand2()
 {
     glPushMatrix();
     glScalef(0.45, 0.65, 0.0);
@@ -13562,6 +13023,7 @@ void PassengerCamp2()
 float moveRedredBus=0.0f;
 float _angleRedredBus1 = 0.0f;
 float _angleRedredBus2 = 0.0f;
+float speedRedredBus= 0.2f;
 
 void redBus()
 {
@@ -13814,7 +13276,7 @@ void redBus()
 void updateredBus1(int value)
 {
 
-    _angleRedredBus1+=1.50f;
+    _angleRedredBus1+=1.5f;
     if(_angleRedredBus1 > 360.0)
     {
         _angleRedredBus1-=360;
@@ -13827,7 +13289,7 @@ void updateredBus1(int value)
 void updateredBus2(int value)
 {
 
-    _angleRedredBus2+=1.50f;
+    _angleRedredBus2+=1.5f;
     if(_angleRedredBus2 > 360.0)
     {
         _angleRedredBus2-=360;
@@ -13840,14 +13302,14 @@ void updateredBus2(int value)
 void updateredBus3(int value)//for ship
 {
     moveRedredBus += 0.4;
-    if(moveRedredBus > 250)
+    if(moveRedredBus > 300)
 
     {
         moveRedredBus = 10;
     }
 
     glutPostRedisplay();
-    glutTimerFunc(50, updateredBus3, 0);
+    glutTimerFunc(60, updateredBus3, 0);
 }
 
 
@@ -14307,6 +13769,9 @@ void Lamppost()
     glVertex2f(73.5f, -49.50f);
 
      glEnd();
+
+
+
 
 
 
@@ -15012,7 +14477,7 @@ void Policebox()
 {
     //Policebox body
 glPushMatrix();
-glTranslatef(-1,-2.5,0);
+glTranslatef(2.8,-4.5,0);
     glBegin(GL_QUADS);
 	glColor3ub(0,139,139);
 
@@ -15027,7 +14492,6 @@ glTranslatef(-1,-2.5,0);
 
      glBegin(GL_QUADS);
 	glColor3ub(255, 255, 255);
-
     glVertex2f(40.30f,9.50f);
     glVertex2f(40.30f, 3.0f);
     glVertex2f(46.70f, 3.0f);
@@ -15036,6 +14500,16 @@ glTranslatef(-1,-2.5,0);
 
      glEnd();
     glPopMatrix();
+
+
+
+    glPushMatrix();
+
+    glTranslatef(43.5,1,0);
+
+    Sprint(.7,0,text);
+    glPopMatrix();
+
 }
 
 void moon()
@@ -15546,28 +15020,28 @@ void nightCloud()
 
 void updatenightCloud12(int value)
 {
-    movenightCloud12 += 1.2;
-    if(movenightCloud12 > 100)
+    movenightCloud12 += 0.9;
+    if(movenightCloud12 > 180)
 
     {
-        movenightCloud12 = -100;
+        movenightCloud12 = -180;
     }
 
     glutPostRedisplay();
-    glutTimerFunc(100, updatenightCloud12, 0);
+    glutTimerFunc(180, updatenightCloud12, 0);
 }
 
 void updatenightCloud3(int value)
 {
-    movenightCloud3 -= 1.2;
-    if(movenightCloud3 < -100)
+    movenightCloud3 -= 0.9;
+    if(movenightCloud3 < -180)
 
     {
-        movenightCloud3 = 100;
+        movenightCloud3 = 180;
     }
 
     glutPostRedisplay();
-    glutTimerFunc(100, updatenightCloud3, 0);
+    glutTimerFunc(180, updatenightCloud3, 0);
 }
 
 
@@ -23983,7 +23457,7 @@ void NightPark()
 
 }
 
-void Varsity()
+void University()
 {
     glPushMatrix();
     glTranslatef(0.0, -15.0,0.0);
@@ -25716,6 +25190,7 @@ void Varsity()
 
 
 }
+
 void dayView()
 {
    /* glLoadIdentity();
@@ -25733,10 +25208,10 @@ void dayView()
     down_upperroad();
     up_upperroad();
 
-    PassengerCamp2();
+    BusStand2();
     yellowBus();
     redBus();
-    Varsity();
+    University();
     trafficLight();
     Building3();
     Building4();
@@ -25748,7 +25223,6 @@ void dayView()
     Lamppost();
     goldenCar();
     blueCar();
-    greenCar();
     bridgeUpperPart();
     NewBuilding1();
     NewBuilding2();
@@ -25769,11 +25243,10 @@ void dayView()
     tree14();
     tree15();
     tree16();
-    PassengerCamp();
+    BusStand1();
     boat1();
     boat2();
     ParkRoad();
-//    uTurn();
     greenBus();
     Policebox();
 
@@ -25802,7 +25275,7 @@ void nightView()
     down_upperroad();
     up_upperroad();
 
-    PassengerCamp2();
+    BusStand2();
     yellowBus();
     redBus();
     nightVarsity();
@@ -25817,7 +25290,6 @@ void nightView()
     Lamppost();
     goldenCar();
     blueCar();
-    greenCar();
     bridgeUpperPart();
     NightNewBuilding1();
     NightNewBuilding2();
@@ -25838,11 +25310,10 @@ void nightView()
     Nighttree14();
     Nighttree15();
     Nighttree16();
-    PassengerCamp();
+    BusStand1();
     boat1();
     boat2();
     ParkRoad();
-//    uTurn();
     greenBus();
     Policebox();
 
@@ -25853,20 +25324,161 @@ void nightView()
 
 }
 
+void day_rainView()
+{
+   /* glLoadIdentity();
+    glMatrixMode(GL_MODELVIEW);*/
+    glClearColor(0.7, 0.6, 0.4, 0.5);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+
+    water();
+    bridgeRoad();
+    ship();
+    sky();
+    sun();
+    Cloud();
+    down_upperroad();
+    up_upperroad();
+
+    BusStand2();
+    yellowBus();
+    redBus();
+    University();
+    trafficLight();
+    Building3();
+    Building4();
+    Building5();
+    Building6();
+    Building7();
+    Building8();
+    Road();
+    Lamppost();
+    goldenCar();
+    blueCar();
+    bridgeUpperPart();
+    NewBuilding1();
+    NewBuilding2();
+    Park();
+    tree1();
+    tree2();
+    tree3();
+    tree4();
+    tree5();
+    tree6();
+    tree7();
+    tree8();
+    tree9();
+    tree10();
+    tree11();
+    tree12();
+    tree13();
+    tree14();
+    tree15();
+    tree16();
+    BusStand1();
+    boat1();
+    boat2();
+    ParkRoad();
+    greenBus();
+    Policebox();
+    rain();
+
+
+    glutSwapBuffers();
+    glFlush();
+
+
+}
+
+void night_rainView()
+{
+   /* glLoadIdentity();
+    glMatrixMode(GL_MODELVIEW);*/
+    glClearColor(0.7, 0.6, 0.4, 0.5);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    nightWater();
+    bridgeRoad();
+    ship();
+    nightSky();
+    moon();
+    stars();
+    nightCloud();
+    down_upperroad();
+    up_upperroad();
+
+    BusStand2();
+    yellowBus();
+    redBus();
+    nightVarsity();
+    trafficLight();
+    NightBuilding3();
+    NightBuilding4();
+    NightBuilding5();
+    NightBuilding6();
+    NightBuilding7();
+    NightBuilding8();
+    Road();
+    Lamppost();
+    goldenCar();
+    blueCar();
+    bridgeUpperPart();
+    NightNewBuilding1();
+    NightNewBuilding2();
+    NightPark();
+    Nighttree1();
+    Nighttree2();
+    Nighttree3();
+    Nighttree4();
+    Nighttree5();
+    Nighttree6();
+    Nighttree7();
+    Nighttree8();
+    Nighttree9();
+    Nighttree10();
+    Nighttree11();
+    Nighttree12();
+    Nighttree13();
+    Nighttree14();
+    Nighttree15();
+    Nighttree16();
+    BusStand1();
+    boat1();
+    boat2();
+    ParkRoad();
+    greenBus();
+    Policebox();
+    rain();
+
+
+    glutSwapBuffers();
+    glFlush();
+
+
+}
 
 void handleKeypress(unsigned char key, int x, int y)
 {
     switch (tolower(key))
     {
-    case 'd':
+    case '1':
         glutDisplayFunc(dayView);
-
         glutPostRedisplay();
         break;
 
-    case 'n':
+    case '2':
         glutDisplayFunc(nightView);
+        glutPostRedisplay();
+        break;
 
+    case '3':
+        glutDisplayFunc(day_rainView);
+        glutPostRedisplay();
+        break;
+
+    case '4':
+        glutDisplayFunc(night_rainView);
         glutPostRedisplay();
         break;
 
@@ -25878,15 +25490,18 @@ void handleKeypress(unsigned char key, int x, int y)
 
 int main(int argc, char** argv)
 {
+
     glutInit(&argc, argv);
     glutInitWindowSize(1500, 720);
     glutCreateWindow("HatirJheel");
     gluOrtho2D(-100.0,100.0,-100.0,100.0);
     glutDisplayFunc(dayView);
     glutKeyboardFunc(handleKeypress);
+
     //glutFullScreen();
 
     glutIdleFunc(Idle);
+
 
     // Register display callback handler for window re-paint
     glutTimerFunc(200, update1, 0);
@@ -25904,9 +25519,6 @@ int main(int argc, char** argv)
     glutTimerFunc(1, updateredBus2, 0);
     glutTimerFunc(50, updateredBus3, 0);
     glutTimerFunc(200, updateBoat2, 0);
-    glutTimerFunc(1, updateGreenCar1, 0);
-    glutTimerFunc(1, updatGreenCar2, 0);
-    glutTimerFunc(50, updateGreenCar3, 0);
     glutTimerFunc(200, updateNightWater1, 0);
     glutTimerFunc(200, updateNightWater2, 0);
     glutTimerFunc(100, updatenightCloud12, 0);
